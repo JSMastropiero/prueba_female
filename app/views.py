@@ -8,6 +8,9 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import OrderingFilter, SearchFilter
+
 
 # Create your views here.
 
@@ -61,15 +64,30 @@ class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]
+    filterset_fields = ['username', 'email']
+    ordering_fields = ['username']
+    search_fields = ['username', 'first_name', 'last_name']
+    
 
 class ArticleViewset(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
 
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]
+    filterset_fields = ['title', 'user', 'tags']
+    ordering_fields = ['title']
+    search_fields = ['title']
+
 
 class CommentViewset(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]
+    filterset_fields = ['content_type', 'description']
+    ordering_fields = ['content_type']
+    search_field = ['description']
 
 
 class TypeOfFileViewset(viewsets.ModelViewSet):
@@ -80,3 +98,9 @@ class TypeOfFileViewset(viewsets.ModelViewSet):
 class FileViewset(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
+
+    filter_backends = [DjangoFilterBackend, OrderingFilter,SearchFilter]
+    filterset_fields = ['name', 'user', 'type_of_file']
+    ordering_fields = ['name']
+    search_fields = ['name']
+  
