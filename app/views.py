@@ -30,30 +30,30 @@ from rest_framework.response import Response
 class Login(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
-        login_serializer = self.serializer_class(data=request.data, context = {'request':request})
+        login_serializer = self.serializer_class(data=request.data, context={'request':request})
         if login_serializer.is_valid():
             user = login_serializer.validated_data['user']
             if user.is_active:
-                token,created = Token.objects.get_or_create(user = user)
+                token,created = Token.objects.get_or_create(user=user)
                 if created:
                     return Response({
                         'token':token.key,
-                        'message': 'token created'
+                        'message':'token created'
                     })
-                else:
-                    token.delete()
-                    token = Token.objects.create(user = user)
-                    return Response({
-                        'token':token.key,
-                        'message': 'token created'
-                    })
+                # else:
+                #     token.delete()
+                #     token = Token.objects.create(user = user)
+                #     return Response({
+                #         'token':token.key,
+                #         'message': 'token created'
+                #     })
             else:
                 print('user not activate') 
-                return Response({'error': 'User not activate'})
+                return Response({'error':'User not activate'})
         else: 
             print('not valid')
-            return Response({'error': 'username or password invalid'})
-        return Response({'mensaje': 'mensaje desde response'})
+            return Response({'error':'username or password invalid'})
+        return Response({'message':'menssage from response'})
 
 
 
