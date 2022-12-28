@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 
+
 # Create your views here.
 
 class CustomAuthToken(ObtainAuthToken):
@@ -28,7 +29,7 @@ class CustomAuthToken(ObtainAuthToken):
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
+
 
 class ArticleViewset(viewsets.ModelViewSet):
     queryset = Article.objects.all()
@@ -48,3 +49,5 @@ class TypeOfFileViewset(viewsets.ModelViewSet):
 class FileViewset(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
+
+
