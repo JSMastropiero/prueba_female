@@ -8,7 +8,6 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 
-
 # Create your models here.
 
 
