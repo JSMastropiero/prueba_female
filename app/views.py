@@ -7,6 +7,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
+from .pagination import *
 
 
 # Create your views here.
@@ -33,6 +34,7 @@ class UserViewset(viewsets.ModelViewSet):
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('username', 'first_name', 'last_name')
 
+
 class ArticleViewset(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
@@ -44,17 +46,18 @@ class CommentViewset(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('description', 'content_type__article')
+    #search_fields = ('description')
+    
 
 
 class TypeOfFileViewset(viewsets.ModelViewSet):
     queryset = TypeOfFile.objects.all()
     serializer_class = TypeOfFileSerializer
-
+    
 
 class FileViewset(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('name', 'description', 'user__username', 'user__first_name', 'user__lastname')
+    search_fields = ('name', 'description', 'user__username', 'user__first_name','user__last_name')
 
