@@ -40,14 +40,15 @@ class ArticleViewset(viewsets.ModelViewSet):
     serializer_class = ArticleSerializer
     filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('title','description', 'tags', 'user__username', 'user__first_name', 'user__last_name')
+    pagination_class = ArticlePagination
 
 
 class CommentViewset(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    #search_fields = ('description')
-    
+    #search_fields = ('content_type__name')
+    pagination_class = CommentPagination
 
 
 class TypeOfFileViewset(viewsets.ModelViewSet):
@@ -59,5 +60,5 @@ class FileViewset(viewsets.ModelViewSet):
     queryset = File.objects.all()
     serializer_class = FileSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    search_fields = ('name', 'description', 'user__username', 'user__first_name','user__last_name')
-
+    search_fields = ('name', 'description', 'user__username', 'user__first_name','user__last_name', 'type_of_file__name')
+    pagination_class = FilePagination

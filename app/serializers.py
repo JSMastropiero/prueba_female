@@ -34,6 +34,7 @@ class TypeOfFileSerializer(serializers.ModelSerializer):
         model = TypeOfFile
         fields = '__all__'
 
+
 class FileSerializer(serializers.ModelSerializer):
     type_of_file = TypeOfFileSerializer(read_only=True)
     type_of_file_id = serializers.PrimaryKeyRelatedField(queryset=TypeOfFile.objects.all(), source="type_of_file")
