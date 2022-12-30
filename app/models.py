@@ -39,6 +39,11 @@ class Article(TimeStampedModel, SoftDeletableModel):
         verbose_name=('tags'),
         blank=True
     )
+
+    image = models.ImageField(
+        verbose_name=('image'),
+        blank= True
+    )
     
     class Meta():
         verbose_name=('article')

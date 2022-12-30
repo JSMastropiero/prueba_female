@@ -47,7 +47,7 @@ class CommentViewset(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     filter_backends = (SearchFilter, OrderingFilter)
-    #search_fields = ('content_type__name')
+    search_fields = ['description']
     pagination_class = CommentPagination
 
 
